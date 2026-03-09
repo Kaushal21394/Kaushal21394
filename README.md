@@ -4,7 +4,7 @@
 
 I build cloud-native data platforms and AI-powered systems that turn complex, regulated healthcare data into business decisions. Based in Toronto 🇨🇦 — currently at **Syneos Health**, where I architect end-to-end pipelines, RAG systems, and multi-source AI Agents that directly support pharmaceutical commercialization for global clients.
 
-> 💡 **This GitHub is my engineering portfolio.** Each pinned repository below is a standalone, documented project that demonstrates a specific area of my work — from AI agent systems to production data pipelines. Scroll down for a guided tour.
+> 💡 **This GitHub is my engineering portfolio.** It's organised into two eras: *current professional work* (projects that reflect what I build today) and *academic foundations* (graduate-level work from Northeastern University that built the technical depth I operate from). Scroll down for a guided tour of both.
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kaushal-chaudhary-236993114/)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com/Kaushal21394)
@@ -14,15 +14,19 @@ I build cloud-native data platforms and AI-powered systems that turn complex, re
 
 ## 🗺️ How to Navigate This Portfolio
 
-This profile is organised around three pillars of my engineering work. Each pillar has one or more dedicated repositories — click through to find architecture diagrams, setup guides, and working code.
+| | Pillar | What it covers | Repo |
+|---|---|---|---|
+| 🟢 | **AI & Agent Systems** | LLM pipelines, RAG, multi-source AI Agents, Streamlit | Production work — see write-up below |
+| 🟢 | **Data Engineering** | End-to-end pipelines, DBT, Snowflake, CI/CD | Production work — see write-up below |
+| 🟢 | **RAG Deep Dive** | Chunking, embeddings, vector stores, evaluation | Production work — see write-up below |
+| 🔵 | **Big Data Engineering** | Hadoop, MapReduce, Hive, Pig, MongoDB | [`BigDataEngineering`](https://github.com/Kaushal21394/BigDataEngineering) |
+| 🔵 | **Data Science & ML** | Classical ML, Deep Learning, NLP, Spark, TensorFlow | [`DataScience`](https://github.com/Kaushal21394/DataScience) |
+| 🔵 | **Data Warehousing & BI** | Dimensional modelling, ETL, Talend, SSIS, Power BI | [`Data-Warehousing-and-Business-Intelligence`](https://github.com/Kaushal21394/Data-Warehousing-and-Business-Intelligence) |
+| 🔵 | **Software Development** | Java OOP, Swing/UI, ER/EER database design | [`SoftwareDevelopment`](https://github.com/Kaushal21394/SoftwareDevelopment) |
 
-| Pillar | What it covers | Key Repos |
-|---|---|---|
-| 🤖 **AI & Agent Systems** | LLM pipelines, RAG architectures, multi-source AI Agents, Streamlit apps | `ai-agent-healthcare` *(coming soon)* |
-| 🔁 **Data Engineering** | End-to-end pipelines, DBT modelling, Snowflake, cloud-native ingestion | `modern-data-pipeline` *(coming soon)* |
-| 🧬 **Domain Projects** | Healthcare data, NGS pipelines, clinical trial systems, BI dashboards | `DataScience`, `BigDataEngineering` |
-
-> **New here?** Start with the AI Agent project — it's the most representative of my current work. If you're interested in data platform fundamentals, jump to the Modern Data Pipeline repo.
+> 🟢 = Current professional-era work &nbsp;|&nbsp; 🔵 = Academic foundation work (Northeastern University, 2017–2019)
+>
+> **New here?** Start with the AI Agent project for my current work. If you're evaluating my data engineering fundamentals, the Data Warehousing & BI and Big Data repos are the most relevant academic pieces.
 
 ---
 
@@ -80,8 +84,6 @@ Cloud-native architectures processing millions of regulated records daily. I've 
 
 ## 📊 Skills Depth Matrix
 
-A snapshot of where I operate at each level — so you know what I can own end-to-end vs. where I contribute:
-
 | Skill Area | Proficiency | Notes |
 |---|---|---|
 | Azure Data Factory | ⭐⭐⭐⭐⭐ | Production pipelines across 5+ years, multi-client |
@@ -97,60 +99,165 @@ A snapshot of where I operate at each level — so you know what I can own end-t
 
 ---
 
-## 📌 Featured Projects
+## 🟢 Current Work — Professional Projects
 
-### 🤖 Multi-Source AI Agent *(coming soon)*
-> An end-to-end AI agent that queries live web data, a Snowflake database, and uploaded PDF documents — then delivers structured insights through a conversational Streamlit interface.
-
-**Why this project exists:** At Syneos Health I build agents like this for pharmaceutical clients. This repo is a public, sanitised demonstration of that architecture using open datasets.
-
-**What you'll find:**
-- Full architecture diagram (web → retrieval → LLM → UI)
-- Modular agent design with swappable data sources
-- Streamlit interface with session memory
-- Evaluation metrics and prompt engineering notes
-
-**Stack:** `LangChain` `Azure OpenAI` `Snowflake` `FAISS` `Streamlit` `Python`
+> **A note on confidentiality:** The three systems below are production-grade platforms built and deployed at Syneos Health for pharmaceutical clients. Due to the proprietary nature of healthcare data and client IP, the source code cannot be published publicly. What I've documented here instead is the architecture, design decisions, and outcomes — the same level of detail I'd walk through in a technical interview or system design discussion.
+>
+> Sanitised public demos using open datasets are planned for each project. Watch this space.
 
 ---
 
-### 🔁 Modern Data Pipeline *(coming soon)*
-> A complete, production-patterned data pipeline: API ingestion → raw storage → DBT transformation → Snowflake → BI dashboard — deployed with GitHub Actions CI/CD.
+### 🤖 Multi-Source AI Agent
+*Production system — architecture documented below*
 
-**Why this project exists:** Most DE portfolios show code snippets. This shows the whole stack — the way it actually gets built on a real team, with tests, documentation, and automated deployment.
+A multi-source AI agent system deployed for both internal analytics teams and external pharmaceutical clients at Syneos Health. The agents ingest live web data, Snowflake Intelligence, and unstructured documents (PDFs, reports, clinical files), and surface insights through self-service Streamlit interfaces designed for non-technical business users — no engineering support required to run a query.
 
-**What you'll find:**
-- Ingestion layer pulling from a public API (Spotify or Reddit)
-- Raw → staging → mart DBT model structure with tests
-- GitHub Actions workflow for automated DBT runs
-- Snowflake schema design and query performance notes
+**Business impact:** Supports decision-making across physician targeting, drug commercialization strategy, campaign planning, and clinical analytics for multiple pharmaceutical clients simultaneously.
 
-**Stack:** `Python` `DBT` `Snowflake` `GitHub Actions` `Tableau / Metabase`
+**Architecture:**
+```
+Data Sources                  Retrieval Layer           Interface
+──────────────                ───────────────           ─────────
+Web (live)      ──►           Vector Store (FAISS)  ──► Streamlit UI
+Snowflake       ──►  Agent ──► Structured Query     ──► Session Memory
+Unstructured    ──►           Document Chunks       ──► Natural Language
+(PDFs/reports)                                           Q&A
+```
 
----
+**Key design decisions:**
+- Modular source connectors so new data sources can be added without restructuring the agent
+- Separate retrieval strategies per source type (semantic search for docs, SQL generation for Snowflake, live fetch for web)
+- Streamlit interface with persistent session memory so users can iterate on queries conversationally
+- Prompt engineering layer to enforce domain-specific response formatting for pharmaceutical use cases
 
-### 🧬 RAG Pipeline Deep Dive *(coming soon)*
-> A focused, opinionated guide to building production-grade RAG systems — covering chunking strategies, embedding models, vector store tradeoffs, and evaluation methods.
-
-**Why this project exists:** Most RAG tutorials show you how to get something running. This shows you how to make it *good* — with benchmarks, failure analysis, and architectural decisions explained.
-
-**What you'll find:**
-- Chunking strategy comparison (fixed, semantic, recursive)
-- Embedding model benchmarks on domain-specific text
-- Vector store comparison: FAISS vs. Chroma vs. Pinecone
-- End-to-end evaluation using RAGAS
-
-**Stack:** `LangChain` `OpenAI` `FAISS` `Chroma` `RAGAS` `Python`
+**Stack:** `LangChain` `Azure OpenAI / GPT-4` `Snowflake Intelligence` `FAISS` `Streamlit` `Python`
 
 ---
 
-### 📚 Legacy Academic Work
-The repositories below are from my graduate studies at Northeastern University (2017–2019). They cover Hadoop/MapReduce, data warehousing, and Java application development — foundational skills that underpin my current platform work.
+### 🔁 Modern Data Pipeline Platform
+*Production system — architecture documented below*
 
-- [`DataScience`](https://github.com/Kaushal21394/DataScience) — ML, Deep Learning, and Big Data projects in Python and Spark
-- [`Data-Warehousing-and-Business-Intelligence`](https://github.com/Kaushal21394/Data-Warehousing-and-Business-Intelligence) — Dimensional modelling, ETL, and BI from source to dashboard
-- [`BigDataEngineering`](https://github.com/Kaushal21394/BigDataEngineering) — Hadoop, Hive, Pig, and MongoDB projects
-- [`SoftwareDevelopment`](https://github.com/Kaushal21394/SoftwareDevelopment) — Java OOP, Swing UI, and database design
+An enterprise-grade data pipeline platform built at Syneos Health, consolidating data from 10+ healthcare source systems into a unified Snowflake analytical layer — serving multiple pharmaceutical clients with HIPAA-compliant, high-availability infrastructure.
+
+**Business impact:** Powers commercial KPI tracking, market forecasting, and executive BI reporting at critical pharmaceutical product launch stages. Standardised reusable pipeline templates that cut delivery time across client engagements.
+
+**Architecture:**
+```
+Ingestion               Transform              Serve
+──────────              ─────────              ─────
+ADF / SnowPipe ──►      DBT (raw → staging ──► Snowflake
+Logic Apps     ──►      → mart layers)     ──► Power BI / Tableau
+Stitch/Fivetran──►      Version-controlled ──► Client Dashboards
+                        models + tests
+                             │
+                        CI/CD (Azure DevOps)
+                        Auto-deploy on merge
+```
+
+**Key design decisions:**
+- Raw → staging → mart DBT layer separation so transformations are testable and independently deployable
+- Reusable ingestion templates parameterised per source system — onboarding a new client data source is configuration, not re-engineering
+- All DBT models version-controlled with automated tests gating every production deployment
+- HIPAA compliance enforced at the architecture level: encryption in transit/rest, role-based access in Snowflake, audit logging throughout
+
+**Stack:** `Azure Data Factory` `Snowflake` `DBT` `Azure DevOps` `Python` `Power BI` `Tableau`
+
+---
+
+### 🧬 RAG Pipeline System
+*Production system — architecture documented below*
+
+A Retrieval-Augmented Generation system built to enable healthcare knowledge retrieval and summarisation across large volumes of unstructured clinical and commercial documents at Syneos Health. Designed from the ground up for production reliability — not just proof-of-concept accuracy.
+
+**Business impact:** Enables pharmaceutical clients and internal analysts to query large document corpora (clinical reports, research literature, campaign briefs) in natural language and receive structured, sourced answers — replacing hours of manual document review.
+
+**Architecture:**
+```
+Documents              Indexing Pipeline         Query Pipeline
+──────────             ─────────────────         ──────────────
+PDFs / Reports ──►     Chunking Strategy  ──►    User Query
+Clinical Files ──►     Embedding Model    ──►    Retrieval (FAISS)
+Research Docs  ──►     Vector Store       ──►    Context Assembly
+                                                 GPT-4 Generation
+                                                 Sourced Response
+```
+
+**Key design decisions:**
+- Semantic chunking strategy chosen over fixed-size to preserve clinical context across paragraph boundaries
+- Retrieval evaluated with multiple similarity thresholds to tune precision vs. recall tradeoff for medical terminology
+- Source attribution enforced in every response so users can verify against the original document
+- Prompt engineering tuned specifically for pharmaceutical domain vocabulary and regulatory language
+
+**Stack:** `LangChain` `Azure OpenAI / GPT-4` `FAISS` `Python` `Streamlit`
+
+---
+
+## 🔵 Academic Foundations — Northeastern University (2017–2019)
+
+These four repositories represent graduate-level coursework from my M.S. in Information Systems at Northeastern. They're included here deliberately — they document the foundational knowledge that underpins everything I build professionally today. Each one covers a distinct layer of the modern data stack.
+
+---
+
+### 📦 [Big Data Engineering](https://github.com/Kaushal21394/BigDataEngineering)
+> Distributed batch analytics using the Hadoop ecosystem — MapReduce, Hive, Pig, and MongoDB — applied to real-world datasets.
+
+**What's inside:**
+- Custom MapReduce jobs with Writable and Partitioner implementations
+- Hive and Pig scripts for large-scale analytical queries
+- MongoDB aggregation pipelines for NoSQL analytics
+- Datasets: Airline On-Time Performance, NYSE market data, MovieLens
+
+**Why it matters today:** The distributed processing patterns here — partitioning, shuffling, aggregation at scale — are the same mental models I apply when designing Spark jobs on Databricks or optimising Snowflake query performance.
+
+**Stack:** `Java` `Hadoop MapReduce` `Hive` `Pig` `MongoDB`
+
+---
+
+### 🧪 [Data Science & Machine Learning](https://github.com/Kaushal21394/DataScience)
+> End-to-end ML projects spanning classical algorithms, deep learning, NLP, recommender systems, and streaming analytics.
+
+**What's inside:**
+- Classical ML: regression, classification, clustering with full evaluation pipelines
+- Deep Learning: CNNs built with TensorFlow for image recognition tasks
+- NLP: text classification, sentiment analysis, and topic modelling
+- Recommender systems using collaborative and content-based filtering
+- Streaming analytics using Apache Spark Streaming
+- Real-world healthcare datasets with emphasis on model interpretability
+
+**Why it matters today:** The ML fundamentals here directly inform how I evaluate and tune LLM-based systems. Understanding model evaluation, feature selection, and bias in classical ML makes me a better AI engineer — not just someone who wraps an API call.
+
+**Stack:** `Python` `Jupyter` `TensorFlow` `Apache Spark` `Scikit-learn`
+
+---
+
+### 🏗️ [Data Warehousing & Business Intelligence](https://github.com/Kaushal21394/Data-Warehousing-and-Business-Intelligence)
+> Full DW/BI lifecycle projects — from source system analysis through dimensional modelling, ETL, and multi-tool visualisation.
+
+**What's inside:**
+- Dimensional modelling (star/snowflake schemas) on industry-standard datasets: AdventureWorks, Chinook, Contoso Retailer
+- ETL pipelines built in both Talend and Microsoft SSIS
+- Multi-database implementations: SQL Server, MySQL, Oracle, PostgreSQL
+- BI dashboards built across Power BI, Tableau, and QlikSense
+- Azure integration for cloud-based data warehouse deployment
+
+**Why it matters today:** This is where I learned to think in terms of data contracts, schema design, and the separation between raw and presentation layers — the same principles I apply in DBT model structuring and Snowflake architecture today. The multi-tool coverage also directly maps to my current BI stack.
+
+**Stack:** `SQL Server` `MySQL` `Oracle` `PostgreSQL` `Talend` `SSIS` `Power BI` `Tableau` `QlikSense` `Azure`
+
+---
+
+### 💻 [Software Development](https://github.com/Kaushal21394/SoftwareDevelopment)
+> Object-oriented application development in Java, including desktop Swing applications and complete database design projects.
+
+**What's inside:**
+- Desktop applications built with Java Swing/UI, packaged as runnable JARs
+- Object-oriented design with clean class hierarchies and design patterns
+- Full database design project: ER/EER modelling through to SQL implementation scripts
+- Emphasis on separation of concerns, reusability, and structured code organisation
+
+**Why it matters today:** Rigorous OOP principles and database design thinking from this era directly shaped how I structure Python APIs, design data models, and think about system architecture — skills that show up every time I build a production backend or data platform from scratch.
+
+**Stack:** `Java` `Swing` `SQL` `ER/EER Modelling`
 
 ---
 
@@ -183,10 +290,10 @@ Genocea Biosciences (2019 – 2021)
 
 ## 🌱 Currently Working On
 
-- [ ] Shipping the **Multi-Source AI Agent** project (Priority #1)
+- [ ] Publishing sanitised open-dataset demo of the **Multi-Source AI Agent**
 - [ ] **Azure Data Engineer Associate (DP-203)** certification
-- [ ] Building out the **Modern Data Pipeline** repo with full CI/CD
-- [ ] Writing about production RAG patterns from real-world experience
+- [ ] Publishing open-source version of the **Modern Data Pipeline** with full CI/CD
+- [ ] Writing about production RAG design decisions from real-world experience
 
 ---
 
