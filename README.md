@@ -19,6 +19,7 @@ I build cloud-native data platforms and AI-powered systems that turn complex, re
 | 🟢 | **AI & Agent Systems** | LLM pipelines, RAG, multi-source AI Agents, Streamlit | Production work — see write-up below |
 | 🟢 | **Data Engineering** | End-to-end pipelines, DBT, Snowflake, CI/CD | Production work — see write-up below |
 | 🟢 | **RAG Deep Dive** | Chunking, embeddings, vector stores, evaluation | Production work — see write-up below |
+| 🟢 | **TrialLens (Open Source)** | Multi-source AI agent · LangChain · Streamlit · Docker · Deployed | [`triallens`](https://github.com/Kaushal21394/triallens) |
 | 🔵 | **Big Data Engineering** | Hadoop, MapReduce, Hive, Pig, MongoDB | [`BigDataEngineering`](https://github.com/Kaushal21394/BigDataEngineering) |
 | 🔵 | **Data Science & ML** | Classical ML, Deep Learning, NLP, Spark, TensorFlow | [`DataScience`](https://github.com/Kaushal21394/DataScience) |
 | 🔵 | **Data Warehousing & BI** | Dimensional modelling, ETL, Talend, SSIS, Power BI | [`Data-Warehousing-and-Business-Intelligence`](https://github.com/Kaushal21394/Data-Warehousing-and-Business-Intelligence) |
@@ -102,8 +103,6 @@ Cloud-native architectures processing millions of regulated records daily. I've 
 ## 🟢 Current Work — Professional Projects
 
 > **A note on confidentiality:** The three systems below are production-grade platforms built and deployed at Syneos Health for pharmaceutical clients. Due to the proprietary nature of healthcare data and client IP, the source code cannot be published publicly. What I've documented here instead is the architecture, design decisions, and outcomes — the same level of detail I'd walk through in a technical interview or system design discussion.
->
-> Sanitised public demos using open datasets are planned for each project. Watch this space.
 
 ---
 
@@ -192,6 +191,40 @@ Research Docs  ──►     Vector Store       ──►    Context Assembly
 
 ---
 
+## 🌐 Open-Source Projects
+
+> Production-quality projects built with public data sources — fully deployable, fully documented, and representative of the same architecture I build professionally.
+
+---
+
+### 🔬 [TrialLens](https://github.com/Kaushal21394/triallens) — Clinical Trial Intelligence Agent
+*Deployed on Render*
+
+A multi-source AI agent for pharmaceutical research — combining live data from ClinicalTrials.gov, PubMed, and FDA drug labels with document-level reasoning over uploaded PDFs. Built as a public demonstration of the agent architecture I design professionally for pharmaceutical clients.
+
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat&logo=python&logoColor=white)
+![LangChain](https://img.shields.io/badge/LangChain-1.2+-000000?style=flat&logo=chainlink&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.55+-FF4B4B?style=flat&logo=streamlit&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat&logo=docker&logoColor=white)
+![Deploy](https://img.shields.io/badge/Deployed-Render-46E3B7?style=flat&logo=render&logoColor=white)
+
+**What it does:**
+- **Conversational research assistant** — natural language queries across 4 live APIs simultaneously; agent autonomously selects and combines sources
+- **Trial Comparison** — add NCT IDs manually or via chat ("compare NCT... and NCT...") → enrollment charts, phase/status analytics, exportable table
+- **Sponsor Pipeline** — type "show me Pfizer pipeline" in chat → navigates to a full pipeline dashboard with Altair charts and metrics
+- **PDF RAG** — upload a protocol or paper and ask questions against it alongside live trial data
+
+**Key engineering decisions:**
+- LangGraph streaming with 3-level fallback for resilient token streaming
+- Dynamic tool registration — document RAG tool only added to agent when a FAISS index exists
+- Chat-to-tab shortcut detection — regex intercepts compare/pipeline intents before they reach the LLM, saving latency and cost
+- Fully pinned `requirements.txt` via `pip freeze` for reproducible Docker builds
+- `st.secrets` → `os.environ` fallback so the same codebase runs locally and on any cloud platform
+
+**Stack:** `LangChain` `LangGraph` `OpenAI GPT-4o-mini` `FAISS` `Streamlit` `Docker` `Render` `ClinicalTrials.gov API v2` `PubMed NCBI E-utilities` `OpenFDA`
+
+---
+
 ## 🔵 Academic Foundations — Northeastern University (2017–2019)
 
 These four repositories represent graduate-level coursework from my M.S. in Information Systems at Northeastern. They're included here deliberately — they document the foundational knowledge that underpins everything I build professionally today. Each one covers a distinct layer of the modern data stack.
@@ -240,7 +273,7 @@ These four repositories represent graduate-level coursework from my M.S. in Info
 - BI dashboards built across Power BI, Tableau, and QlikSense
 - Azure integration for cloud-based data warehouse deployment
 
-**Why it matters today:** This is where I learned to think in terms of data contracts, schema design, and the separation between raw and presentation layers — the same principles I apply in DBT model structuring and Snowflake architecture today. The multi-tool coverage also directly maps to my current BI stack.
+**Why it matters today:** This is where I learned to think in terms of data contracts, schema design, and the separation between raw and presentation layers — the same principles I apply in DBT model structuring and Snowflake architecture today.
 
 **Stack:** `SQL Server` `MySQL` `Oracle` `PostgreSQL` `Talend` `SSIS` `Power BI` `Tableau` `QlikSense` `Azure`
 
@@ -255,7 +288,7 @@ These four repositories represent graduate-level coursework from my M.S. in Info
 - Full database design project: ER/EER modelling through to SQL implementation scripts
 - Emphasis on separation of concerns, reusability, and structured code organisation
 
-**Why it matters today:** Rigorous OOP principles and database design thinking from this era directly shaped how I structure Python APIs, design data models, and think about system architecture — skills that show up every time I build a production backend or data platform from scratch.
+**Why it matters today:** Rigorous OOP principles and database design thinking from this era directly shaped how I structure Python APIs, design data models, and think about system architecture.
 
 **Stack:** `Java` `Swing` `SQL` `ER/EER Modelling`
 
@@ -290,7 +323,7 @@ Genocea Biosciences (2019 – 2021)
 
 ## 🌱 Currently Working On
 
-- [ ] Publishing sanitised open-dataset demo of the **Multi-Source AI Agent**
+- [x] Published **[TrialLens](https://github.com/Kaushal21394/triallens)** — open-source multi-source AI agent for clinical trial research, deployed on Render
 - [ ] **Azure Data Engineer Associate (DP-203)** certification
 - [ ] Publishing open-source version of the **Modern Data Pipeline** with full CI/CD
 - [ ] Writing about production RAG design decisions from real-world experience
