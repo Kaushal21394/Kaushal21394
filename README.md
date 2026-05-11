@@ -225,7 +225,7 @@ A multi-source AI agent for pharmaceutical research — combining live data from
 
 ---
 
-## ARIA — Account Research & Intelligence Agent
+## [ARIA — Account Research & Intelligence Agent](https://github.com/Kaushal21394/aria)
 
 A full-stack agentic application that automates pharma/biotech account research for CRO business development. Given a sponsor name and a goal, a LangGraph multi-agent pipeline fetches live trial data from ClinicalTrials.gov, pulls SEC EDGAR filings, scores CRO fit across five dimensions, and generates a goal-specific output — account snapshot, pipeline summary, competitive brief, or RAG-grounded outreach email.
 
