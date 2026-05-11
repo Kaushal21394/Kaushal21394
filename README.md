@@ -225,6 +225,21 @@ A multi-source AI agent for pharmaceutical research — combining live data from
 
 ---
 
+## ARIA — Account Research & Intelligence Agent
+
+A full-stack agentic application that automates pharma/biotech account research for CRO business development. Given a sponsor name and a goal, a LangGraph multi-agent pipeline fetches live trial data from ClinicalTrials.gov, pulls SEC EDGAR filings, scores CRO fit across five dimensions, and generates a goal-specific output — account snapshot, pipeline summary, competitive brief, or RAG-grounded outreach email.
+
+Built end-to-end as a learning project across four phases: structured LLM output with self-correcting JSON parsing, a planner-routed StateGraph with context preservation across agents, a ChromaDB RAG layer over 50 synthetic CRO proposals, and a production SaaS layer with JWT auth, multi-tenancy, cost metering, and a chat interface backed by tool-calling Claude.
+
+**Stack:** FastAPI · LangGraph · Anthropic Claude · ChromaDB · OpenAI Embeddings · React 18 · Tailwind CSS · SQLite
+
+### Skills demonstrated
+- Multi-agent orchestration with LangGraph StateGraph
+- Retrieval-Augmented Generation (ChromaDB + RAGAS evaluation)
+- Structured LLM output with self-correction (Anthropic SDK)
+- Production API patterns: JWT auth, rate limiting, SSE streaming, cost metering
+- Full-stack: FastAPI backend + React/Vite frontend
+
 ## 🔵 Academic Foundations — Northeastern University (2017–2019)
 
 These four repositories represent graduate-level coursework from my M.S. in Information Systems at Northeastern. They're included here deliberately — they document the foundational knowledge that underpins everything I build professionally today. Each one covers a distinct layer of the modern data stack.
