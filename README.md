@@ -20,6 +20,7 @@ I build cloud-native data platforms and AI-powered systems that turn complex, re
 | 🟢 | **Data Engineering** | End-to-end pipelines, DBT, Snowflake, CI/CD | Production work — see write-up below |
 | 🟢 | **RAG Deep Dive** | Chunking, embeddings, vector stores, evaluation | Production work — see write-up below |
 | 🟢 | **TrialLens (Open Source)** | Multi-source AI agent · LangChain · Streamlit · Docker · Deployed | [`triallens`](https://github.com/Kaushal21394/triallens) |
+| 🟢 | **Olist Data Platform (Open Source)** | dbt medallion warehouse · LangGraph RAG agent · MCP server | [`olist-ecommerce-pipeline`](https://github.com/Kaushal21394/olist-ecommerce-pipeline) |
 | 🔵 | **Big Data Engineering** | Hadoop, MapReduce, Hive, Pig, MongoDB | [`BigDataEngineering`](https://github.com/Kaushal21394/BigDataEngineering) |
 | 🔵 | **Data Science & ML** | Classical ML, Deep Learning, NLP, Spark, TensorFlow | [`DataScience`](https://github.com/Kaushal21394/DataScience) |
 | 🔵 | **Data Warehousing & BI** | Dimensional modelling, ETL, Talend, SSIS, Power BI | [`Data-Warehousing-and-Business-Intelligence`](https://github.com/Kaushal21394/Data-Warehousing-and-Business-Intelligence) |
@@ -225,6 +226,46 @@ A multi-source AI agent for pharmaceutical research — combining live data from
 
 ---
 
+### 🛒 [Olist Data Platform](https://github.com/Kaushal21394/olist-ecommerce-pipeline) — Medallion Warehouse + RAG Agent
+
+A dbt-built medallion warehouse (bronze → silver → gold) over the Olist Brazilian
+e-commerce dataset (~100K orders), topped with a LangGraph agent that answers
+natural-language questions by writing SQL, searching review text by meaning, or
+both — plus an MCP server that runs the same agent inside Claude Desktop with no
+custom front end.
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![dbt](https://img.shields.io/badge/dbt-FF694B?style=flat&logo=dbt&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)
+![LangGraph](https://img.shields.io/badge/LangGraph-000000?style=flat&logo=chainlink&logoColor=white)
+
+**What it does:**
+- **Natural-language analytics** — a text-to-SQL agent generates and validates SQL
+  against a tested dbt star schema, behind a three-layer safety model (`sqlglot`
+  parse/validate → read-only database role → schema-level grants)
+- **Semantic review search** — multilingual sentence-transformer embeddings in
+  `pgvector` surface customer complaints by meaning, with score/state/delivery filters
+- **Multi-turn conversation** — LangGraph checkpoints every step in Postgres, so a
+  follow-up question resolves against the right prior tool result instead of losing context
+- **MCP server** — exposes the warehouse schema and both tools to Claude Desktop over
+  stdio; used to build a full monthly-performance dashboard conversationally, with no
+  bespoke UI
+- **Evaluated, not just demoed** — a golden set of hand-written questions scores both
+  the raw SQL/search layer and the full agent end to end on every change
+
+**Key engineering decisions:**
+- Read-only role, SQL parser validation, and database grants as independent, overlapping
+  safety layers, so a gap in one doesn't expose a write path
+- dbt's persisted column/table descriptions double as the agent's schema card — update
+  the dbt YAML, the agent's knowledge updates on the next build, with no separate doc to
+  keep in sync
+- A real follow-up-context bug (a counting question answered from an in-context sample
+  instead of a fresh query) was caught by the eval harness and fixed before it shipped
+
+**Stack:** `dbt-postgres` `PostgreSQL` `pgvector` `LangGraph` `LangChain` `Anthropic Claude` `sentence-transformers` `sqlglot` `MCP`
+
+---
+
 ## [ARIA — Account Research & Intelligence Agent](https://github.com/Kaushal21394/aria)
 
 A full-stack agentic application that automates pharma/biotech account research for CRO business development. Given a sponsor name and a goal, a LangGraph multi-agent pipeline fetches live trial data from ClinicalTrials.gov, pulls SEC EDGAR filings, scores CRO fit across five dimensions, and generates a goal-specific output — account snapshot, pipeline summary, competitive brief, or RAG-grounded outreach email.
@@ -339,6 +380,7 @@ Genocea Biosciences (2019 – 2021)
 ## 🌱 Currently Working On
 
 - [x] Published **[TrialLens](https://github.com/Kaushal21394/triallens)** — open-source multi-source AI agent for clinical trial research, deployed on Render
+- [x] Published **[Olist Data Platform](https://github.com/Kaushal21394/olist-ecommerce-pipeline)** — dbt medallion warehouse + LangGraph RAG agent + MCP server
 - [ ] **Azure Data Engineer Associate (DP-203)** certification
 - [ ] Publishing open-source version of the **Modern Data Pipeline** with full CI/CD
 - [ ] Writing about production RAG design decisions from real-world experience
